@@ -9,6 +9,18 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var attendanceRouter = require('./routes/attendance');
 var instructorRouter = require('./routes/instructor');
+var mongoose = require('mongoose');
+const db_url="mongodb://heroku_sp406f4tt:hackFresno2018@ds135252.mlab.com:35252/heroku_sp406f4t";
+mongoose.connect(db_url).exec().then(()=>
+{
+  console.log("MongoDB connected")
+})
+.catch(err=>
+{
+  console.log('error connected to MongoDB');
+});
+
+
 
 var app = express();
 
