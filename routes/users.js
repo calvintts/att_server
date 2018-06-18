@@ -4,7 +4,7 @@ var User = require('../lib/User');
 var md5= require('md5');
 var mongoose = require('mongoose');
 var ExpressBrute = require ('express-brute');
-var db_url="mongodb://heroku_sp406f4tt:hackFresno2018@ds135252.mlab.com:35252/heroku_sp406f4t";
+var db_url="mongodb://user_admin:admin123@ds117590.mlab.com:17590/attendance";
 var store = new ExpressBrute.MemoryStore();
 var bruteforce = new ExpressBrute(store,{
 	freeRetries: 2,
