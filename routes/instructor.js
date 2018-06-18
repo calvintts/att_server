@@ -13,7 +13,6 @@ var bruteforce = new ExpressBrute(store,{
 	failCallback: ExpressBrute.FailTooManyRequests
 });
 
-var db_url = "mongodb://heroku_sp406f4tt:hackFresno2018@ds135252.mlab.com:35252/heroku_sp406f4t";
 
 
 
@@ -27,13 +26,6 @@ router.get('/', function(req, res, next) {
 //POST REQUEST FOR SAVING USER TO DB
 router.post('/register',function(req,res)
 {
-  //CONNECT TO DATABASE
-  mongoose.connect(db_url);
-  var db = mongoose.connection;
-  db.once("open",function() {
-  	console.log("DB connected!");
-  });
-
     if(!req.body.email) return res.json({"result":false, "message":"Email required"});
     if(!req.body.password) return res.json({"result":false, "message":"Password required"});
     if(!req.body.firstname) return res.json({"result":false, "message":"Firstname required"});
@@ -77,12 +69,6 @@ router.post('/register',function(req,res)
 //POST REQUEST FOR FINDING USER
 router.post('/login',bruteforce.prevent,function(req,res,next)
 {
-  //CONNECT TO DATABASE
-  mongoose.connect(db_url);
-  var db = mongoose.connection;
-  db.once("open",function() {
-  	console.log("DB connected!");
-  });
   if(!req.body.email) return res.json({"result":false, "message":"Email required"});
   if(!req.body.password) return res.json({"result":false, "message":"Password required"});
   var email = req.body.email;

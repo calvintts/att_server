@@ -14,10 +14,6 @@ var bruteforce = new ExpressBrute(store,{
 });
 
 
-//CONNECT TO DATABASE
-mongoose.connect(db_url);
-var db = mongoose.connection;
-
 
 
 /* GET home page. */
@@ -29,10 +25,6 @@ router.get('/', function(req, res, next) {
 //POST REQUEST FOR SAVING USER TO DB
 router.post('/register',function(req,res)
 {
-  db.once("open",function() {
-  	console.log("DB connected!");
-  });
-
     if(!req.body.email) return res.json({"result":false, "message":"Email required"});
     if(!req.body.password) return res.json({"result":false, "message":"Password required"});
     if(!req.body.firstname) return res.json({"result":false, "message":"Firstname required"});
@@ -76,11 +68,6 @@ router.post('/register',function(req,res)
 //POST REQUEST FOR FINDING USER
 router.post('/login',bruteforce.prevent,function(req,res,next)
 {
-	mongoose.connect(db_url);
-  var db = mongoose.connection;
-  db.once("open",function() {
-  	console.log("DB connected!");
-  });
   if(!req.body.email) return res.json({"result":false, "message":"Email required"});
   if(!req.body.password) return res.json({"result":false, "message":"Password required"});
   var email = req.body.email;

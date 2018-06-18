@@ -10,8 +10,16 @@ var usersRouter = require('./routes/users');
 var attendanceRouter = require('./routes/attendance');
 var instructorRouter = require('./routes/instructor');
 var mongoose = require('mongoose');
-const db_url="mongodb://heroku_sp406f4tt:hackFresno2018@ds135252.mlab.com:35252/heroku_sp406f4t";
+
+//CONNECT TO DATABASE
+const db_url="mongodb://user_admin:admin123@ds117590.mlab.com:17590/attendance";
 mongoose.connect(db_url);
+var db = mongoose.connection;
+
+setTimeout(function () {
+	console.log(db.readyState);
+}, 5000);
+//check DB STATUS
 // var db = mongoose.connection;
 // db.once("open",function(err)
 // {
