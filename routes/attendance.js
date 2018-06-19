@@ -4,10 +4,8 @@ var Class = require('../lib/class');
 var mongoose = require('mongoose');
 var moment = require('moment');
 var geolib = require('geolib');
-//start the db for attendance
 router.post('/',function(req,res)
 {
-  //CONNECT TO DATABASE
   var cords = req.body.location.coordinates;
   var tempClass=new Class();
   var classDay = moment().month()+1 + '/' + moment().date() + '/' + moment().year();
