@@ -15,7 +15,7 @@ var bruteforce = new ExpressBrute(store,{
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Hey Calvin Your API is working' });
 });
 
 

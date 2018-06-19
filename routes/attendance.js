@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Class = require('../lib/class');
+var Class = require('../models/class');
 var mongoose = require('mongoose');
 var moment = require('moment');
 var geolib = require('geolib');

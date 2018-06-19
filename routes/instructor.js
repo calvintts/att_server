@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Instructor = require('../lib/Instructor');
+var Instructor = require('../models/Instructor');
 var md5= require('md5');
 var mongoose = require('mongoose');
 var ExpressBrute = require ('express-brute');
