@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('hello calvin');
+  res.status(200).send('hello calvin');
 });
 
 

@@ -54,13 +54,13 @@ router.post('/register',function(req,res)
                 newInstructor.save(function(err,savedInstructor){
                     if(err){
                         console.log(err);
-                        return res.json({"result":false, "message":"Failed creating an account"});
+                        return res.status(400).json({"result":false, "message":"Failed creating an account"});
                     }
-                    return res.json({"result":true, "message":"Account Registered!"});
+                    return res.status(200).json({"result":true, "message":"Account Registered!"});
                 });
             }else{
                 console.log(instructor);
-                res.json({"result":false, "message":"Email already exists"});
+                res.status(400).json({"result":false, "message":"Email already exists"});
             }
         }
     });
@@ -82,8 +82,7 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
         //if instructor exists
         console.log(instructor);
         if(instructor) {
-						req.session.instructor = instructor;
-            return res.json({
+            return res.status(200).json({
                 "result": true,
                 "message": "Login success",
                 "data": {
@@ -94,7 +93,7 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
           });
         }
         // if instructor doesn't exist
-        res.json({
+        res.status(404).json({
             "result": false,
             "message": "Login Failed"
         });
@@ -105,7 +104,7 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
 router.get('/logout',function(req,res)
 {
 	// req.session.destroy();
-	return res.json({
+	return res.status(200).json({
 		"result":true,
 		"message":"User logged out"
 	});

@@ -20,16 +20,16 @@ router.post('/start',function(req,res)
   newClass.save(function(err,savedClass){
       if(err){
           console.log(err);
-          return res.json({"result":false, "message":"Failed creating attendance sheet"});
+          return res.status(400).json({"result":false, "message":"Failed creating attendance sheet"});
       }
-      return res.json({"result":true, "message":"Attendance Started!"});
+      return res.status(200).json({"result":true, "message":"Attendance Started!"});
   });
 });
 
 
 router.get('/end',function(req,res){
   mongoose.connection.close();
-  return res.json({"message":"Attendance stopped!"});
+  return res.status(200).json({"message":"Attendance stopped!"});
 });
 
 

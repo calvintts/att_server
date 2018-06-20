@@ -20,7 +20,7 @@ router.post('/',function(req,res)
       if(geolib.getDistance(returnedClass['location'].coordinates,
       cords)<300){
           returnedClass.attendance.push({student_id: req.session.user['id_number']});
-          res.json({"result":true,
+          res.status(200).json({"result":true,
                     "message":"Attendance Marked"});
       }
       else {

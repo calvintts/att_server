@@ -18,7 +18,7 @@ var bruteforce = new ExpressBrute(store,{
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.send('hello calvin');
+	res.status(200).send('hello calvin, this api is working');
 });
 
 
@@ -53,13 +53,13 @@ router.post('/register',function(req,res)
                 newUser.save(function(err,savedUser){
                     if(err){
                         console.log(err);
-                        return res.json({"result":false, "message":"Failed creating an account"});
+                        return res.status(400).json({"result":false, "message":"Failed creating an account"});
                     }
-                    return res.json({"result":true, "message":"Account Registered!"});
+                    return res.status(200).json({"result":true, "message":"Account Registered!"});
                 });
             }else{
                 console.log(user);
-                res.json({"result":false, "message":"Email already exists"});
+                res.status(400).json({"result":false, "message":"Email already exists"});
             }
         }
     });
@@ -81,8 +81,7 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
         //if user exists
         console.log(user);
         if(user) {
-						req.session.user = user;
-            return res.json({
+            	return res.status(200).json({
                 "result": true,
                 "message": "Login success",
                 "data": {
@@ -93,7 +92,7 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
           });
         }
         // if user doesn't exist
-        res.json({
+        res.status(404).json({
             "result": false,
             "message": "Login Failed"
         });
@@ -101,28 +100,27 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
   })
 });
 
-router.get('/menu',function(req,res){
-		// return res.json({
-		// 	"result": false,
-		// 	"message": "User not logged in"
-		// });}
-		// else{
-		return res.json({
-			"result":true,
-			"message": "Session Created",
-			"data": {
-					"firstname": req.session.user['firstname'],
-					"lastname": req.session.user['lastname'],
-					"id_number": req.session.user['id_number']
-			}
-		});
-	}
-});
+// router.get('/menu',function(req,res){
+// 		// return res.json({
+// 		// 	"result": false,
+// 		// 	"message": "User not logged in"
+// 		// });}
+// 		// else{
+// 		return res.json({
+// 			"result":true,
+// 			"message": "Session Created",
+// 			"data": {
+// 					"firstname": req.session.user['firstname'],
+// 					"lastname": req.session.user['lastname'],
+// 					"id_number": req.session.user['id_number']
+// 			}
+// 		});
+// });
 
 router.get('/logout',function(req,res)
 {
 	req.session.destroy();
-	return res.json({
+	return res.status(200).json({
 		"result":true,
 		"message":"User logged out"
 	});
