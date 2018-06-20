@@ -82,13 +82,15 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
         //if instructor exists
         console.log(instructor);
         if(instructor) {
+					var token = jwt.sign({email},config.secret,{expiresIn:86400});
             return res.status(200).json({
                 "result": true,
                 "message": "Login success",
                 "data": {
                     "firstname": instructor['firstname'],
                     "lastname": instructor['lastname'],
-                    "id_number": instructor['id_number']
+                    "id_number": instructor['id_number'],
+										"token": token
                 }
           });
         }

@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
+var jwt = require('jsonwebtoken');
 var md5= require('md5');
 var mongoose = require('mongoose');
 var ExpressBrute = require ('express-brute');
 var db_url="mongodb://user_admin:admin123@ds117590.mlab.com:17590/attendance";
+var config = require('./config');
 var store = new ExpressBrute.MemoryStore();
 var bruteforce = new ExpressBrute(store,{
 	freeRetries: 2,
@@ -81,13 +83,15 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
         //if user exists
         console.log(user);
         if(user) {
+							var token = jwt.sign({email},config.secret,{expiresIn:86400});
             	return res.status(200).json({
                 "result": true,
                 "message": "Login success",
                 "data": {
                     "firstname": user['firstname'],
                     "lastname": user['lastname'],
-                    "id_number": user['id_number']
+                    "id_number": user['id_number'],
+										"token": token
                 }
           });
         }
