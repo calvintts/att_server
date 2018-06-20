@@ -102,12 +102,11 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
 });
 
 router.get('/menu',function(req,res){
-	if(!req.session.user){
-		return res.json({
-			"result": false,
-			"message": "User not logged in"
-		});}
-		else{
+		// return res.json({
+		// 	"result": false,
+		// 	"message": "User not logged in"
+		// });}
+		// else{
 		return res.json({
 			"result":true,
 			"message": "Session Created",

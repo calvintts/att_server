@@ -10,10 +10,9 @@ router.post('/',function(req,res)
   var tempClass=new Class();
   var classDay = moment().month()+1 + '/' + moment().date() + '/' + moment().year();
   var classNumber = req.body.classNumber;
-  if(!req.session.user)
-  return res.json({"result":false,
-                    "message":"User not logged in"
-                  });
+  // return res.json({"result":false,
+  //                   "message":"User not logged in"
+  //                 });
   Class.findOne({classNumber:classNumber,classDay:classDay},function(err,returnedClass){
     if(err){
       next(err);
