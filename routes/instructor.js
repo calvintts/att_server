@@ -89,9 +89,10 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
                 "data": {
                     "firstname": instructor['firstname'],
                     "lastname": instructor['lastname'],
-                    "id_number": instructor['id_number'],
-										"token": token
-                }
+                    "id_number": instructor['id_number']},
+										"headers": {
+										"token": 'Bearer' + token
+									}
           });
         }
         // if instructor doesn't exist

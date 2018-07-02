@@ -91,8 +91,10 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
                     "firstname": user['firstname'],
                     "lastname": user['lastname'],
                     "id_number": user['id_number'],
-										"token": token
                 }
+								"headers": {
+								"token": 'Bearer' + token
+							}
           });
         }
         // if user doesn't exist
